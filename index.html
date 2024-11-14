@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Gallery and Writing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: black;
+            color: white;
+        }
+        header {
+            background-color: #000;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #000;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: #39ff14;
+            text-decoration: none;
+            padding: 5px 15px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            color: #ffff00;
+            text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00;
+        }
+        h1, h2, h3 {
+            color: #39ff14;
+            text-align: center;
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+        .gallery img {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+            border: 2px solid #39ff14;
+        }
+        .writing {
+            margin: 40px auto;
+            background-color: #111;
+            padding: 20px;
+            border: 1px solid #39ff14;
+            max-width: 800px;
+        }
+        article {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #39ff14;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        .content {
+            display: none;
+        }
+        .read-more {
+            color: #39ff14;
+            cursor: pointer;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+        }
+        #search {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #search input {
+            background-color: #111;
+            color: white;
+            border: 1px solid #39ff14;
+            padding: 5px;
+        }
+        #search button {
+            background-color: #39ff14;
+            color: black;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #search button:hover {
+            background-color: #ffff00;
+            color: black;
+            text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00;
+            box-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Gallery and Writing</h1>
+    </header>
+
+    <nav>
+        <a href="#gallery">Gallery</a>
+        <a href="#poems">Poems</a>
+        <a href="#stories">Stories</a>
+    </nav>
+
+    <div id="search">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button onclick="search()">Search</button>
+    </div>
+
+    <section id="gallery" class="gallery">
+        <img src="jj.jpg" alt="Description of image 1">
+        <img src="image2.jpg" alt="Description of image 2">
+        <img src="image3.jpg" alt="Description of image 3">
+    </section>
+
+    <section id="poems" class="writing">
+        <h2>My Poems</h2>
+        <article>
+            <h3>Vase of love</h3>
+            <p class="preview">Shakespear was right about lo...</p>
+            <div class="content">
+                <p>
+                   <br> Shakespear was right about love;
+                   <br> I’ll love you always;
+                   <br> I’ll love you all ways;
+                   <br> Like the sun it will forever burn;
+                   <br> Like the moon it will forever shine;
+                   <br> But even though yours is not mine;
+                   <br> Mine will never cease to die;
+                   <br> How I wish for you to be mine;
+                   <br> For you turned me into a beggar;
+                   <br> And you the thief;
+                   <br> For you stole the breath, from my lungs;
+                   <br> Stole the thoughts, from my mind;
+                   <br> Stole the heart, from my chest;
+                   <br> And all I beg from you;
+                   <br> Is to steal the love from me;
+                   <br> But all that is the sensation of mind</p>
+            </div>
+            <span class="read-more" onclick="toggleContent(this)">Read More</span>
+        </article>
+        <article>
+            <h3>Poem Title 2</h3>
+            <p class="preview">Another poem preview...</p>
+            <div class="content">
+                <p>Full content of the second poem...</p>
+            </div>
+            <span class="read-more" onclick="toggleContent(this)">Read More</span>
+        </article>
+
+        <article>
+            <h3>Poem Title 3</h3>
+            <p class="preview">Another poem preview...</p>
+            <div class="content">
+                <p>Full content of the second poem...</p>
+            </div>
+            <span class="read-more" onclick="toggleContent(this)">Read More</span>
+        </article>
+    </section>
+
+    <section id="stories" class="writing">
+        <h2>My Stories</h2>
+        <article>
+            <h3>Story Title 1</h3>
+            <p class="preview">A preview of the first story...</p>
+            <div class="content">
+                <p>Full content of the story goes here...</p>
+            </div>
+            <span class="read-more" onclick="toggleContent(this)">Read More</span>
+        </article>
+        <article>
+            <h3>Story Title 2</h3>
+            <p class="preview">Another story preview...</p>
+            <div class="content">
+                <p>Full content of the second story...</p>
+            </div>
+            <span class="read-more" onclick="toggleContent(this)">Read More</span>
+        </article>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let currentImage = 0;
+        const images = document.querySelectorAll('.gallery img');
+
+        function showNextImage() {
+            images[currentImage].style.display = 'none';
+            currentImage = (currentImage + 1) % images.length;
+            images[currentImage].style.display = 'block';
+        }
+
+        images[0].style.display = 'block';
+        setInterval(showNextImage, 3000);
+
+        function toggleContent(element) {
+            const content = element.previousElementSibling;
+            const preview = content.previousElementSibling;
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                preview.style.display = 'none';
+                element.textContent = 'Read Less';
+            } else {
+                content.style.display = 'none';
+                preview.style.display = 'block';
+                element.textContent = 'Read More';
+            }
+        }
+
+        function search() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const articles = document.querySelectorAll('article');
+
+            articles.forEach(article => {
+                const title = article.querySelector('h3').textContent.toLowerCase();
+                const content = article.querySelector('.content').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    article.style.display = 'block';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
